@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bojik0fhxvlkv"]
+
+[ext_resource type="Script" path="res://pen.gd" id="1_8ay3o"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k135w"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_j4pmd"]
+sky_material = SubResource("ProceduralSkyMaterial_k135w")
+
+[sub_resource type="Environment" id="Environment_h2epf"]
+background_mode = 2
+sky = SubResource("Sky_j4pmd")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t0kam"]
+top_radius = 0.1
+bottom_radius = 0.15
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xo42r"]
+top_radius = 0.15
+bottom_radius = 0.05
+height = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cyale"]
+radius = 0.02
+height = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_v5n71"]
+size = Vector3(1, 0.01, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.921876, 2.71937)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2epf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Pen" type="Node3D" parent="."]
+script = ExtResource("1_8ay3o")
+
+[node name="Body" type="MeshInstance3D" parent="Pen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21412, -0.000329733)
+mesh = SubResource("CylinderMesh_t0kam")
+skeleton = NodePath("")
+
+[node name="Chamfer" type="MeshInstance3D" parent="Pen/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.949667, 0)
+mesh = SubResource("CylinderMesh_xo42r")
+skeleton = NodePath("")
+
+[node name="Tip" type="MeshInstance3D" parent="Pen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.198977, -0.000329733)
+mesh = SubResource("CapsuleMesh_cyale")
+skeleton = NodePath("")
+
+[node name="PressureLabel" type="Label3D" parent="Pen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317638, 1.59277, 0)
+billboard = 1
+text = "Pressure"
+horizontal_alignment = 0
+
+[node name="TiltLabel" type="Label3D" parent="Pen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.317638, 1.37849, 0)
+billboard = 1
+text = "Tilt
+"
+horizontal_alignment = 0
+
+[node name="Tablet" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00600491, 0)
+mesh = SubResource("BoxMesh_v5n71")
