@@ -36,7 +36,7 @@ height = 0.4
 [sub_resource type="BoxMesh" id="BoxMesh_v5n71"]
 size = Vector3(1, 0.01, 1)
 
-[node name="Node3D" type="Node3D"]
+[node name="TabletVisualizer" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.921876, 2.71937)

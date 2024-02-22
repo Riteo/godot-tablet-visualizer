@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="Godot Tablet Visualizer"
-run/main_scene="res://node_3d.tscn"
+run/main_scene="res://tablet_visualizer.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
