@@ -24,8 +24,21 @@ func _input(event: InputEvent) -> void:
 			%Tip.position.y = tip_transform.origin.y + tip_offset
 
 		# This node acts as a pivot, so we just need to tilt it.
-		rotation_degrees.x = event.tilt.x * 90
-		rotation_degrees.y = event.tilt.y * 90
+		# The tilt vector works pretty much in the same coordinate space as
+		# Godot's 2D one: X is horizontal (increasing to the right), while Y is
+		# vertical (increasing to the bottom, which in our case means closer to
+		# the user). To sum it up, here's a nice ASCII diagram:
+		#
+		#       ^ -y
+		#       |
+		# -x <--+--> +x
+		#       |
+		#       v +y
+		#
+		#        =
+		#      .o/ <- user
+		rotation_degrees.x = event.tilt.y * 90
+		rotation_degrees.z = -event.tilt.x * 90
 
 		$InfoLabel.text = "Pressure: %.2f\nTilt: [%.2f, %.2f]\nEraser: %s" \
 			% [event.pressure, event.tilt.x, event.tilt.y, event.pen_inverted]
